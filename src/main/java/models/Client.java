@@ -93,14 +93,94 @@ public class Client implements Data{
         return Objects.hash(id, name, email, phone_number, project_name, description_project, timeline_project, price, designer_id);
     }
 
-
-    @Override
-    public void save() {
-
+    public void save(){
+        if(this.name.equals("")||this.email.equals("")||this.phone_number.equals("")||this.project_name.equals("")||this.description_project.equals("")||this.name.equals(null)||this.email.equals(null)||this.phone_number.equals(null)||this.project_name.equals(null)||this.description_project.equals(null)){
+            throw new IllegalArgumentException("Fill all the fields");
+        }
+        try (Connection con= sql2o.open()){
+            String sql ="INSERT INTO clients (name,email,phone_number,project_name,description_project,timeline_project,price,designer_id) VALUES (:name,:email,:phone_number,:project_name,:description_project,:timeline_project,:price,designer_id)";
+            String joindesigner="INSERT INTO designers_clients (designer_id,client_id) VALUES (:designer_id,:client_id)";
+            this.id=(int) con.createQuery(sql,true)
+                    .addParameter("name",this.name)
+                    .addParameter("email",this.email)
+                    .addParameter("phone_number",this.phone_number)
+                    .addParameter("project_name",this.project_name)
+                    .addParameter("description_project",this.description_project)
+                    .addParameter("timeline_project",this.timeline_project)
+                    .addParameter("price",this.price)
+                    .addParameter("designer_id",this.designer_id)
+                    .throwOnMappingFailure(false)
+                    .executeUpdate()
+                    .getKey();
+            con.createQuery(joindesigner).addParameter("designer_id",this.getDesigner_id()).addParameter("client_id",
+                    this.getId()).executeUpdate();
+        }
     }
-
+    public static List<Client> all(){
+        try (Connection con= sql2o.open()){
+            String sql="SELECT * FROM clients";
+            return con.createQuery(sql)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Client.class);
+        }
+    }
+    public Client findById(int id) {
+        try (Connection con= sql2o.open()){
+            String sql="SELECT * FROM clients WHERE id=:id";
+            return con.createQuery(sql)
+                    .addParameter("id",id)
+                    .executeAndFetchFirst(Client.class);
+        }
+    }
+    public void update(int id,String name, String email, String phone_number, String project_name,String description_project ,String timeline_project,String price){
+        try (Connection con= sql2o.open()){
+            String sql="UPDATE clients SET name=:name,email=:email,phone_number=:phone_number,project_name=:project_name,description_project=:description_project,timeline_project=:timeline_project,price=:price,designer_id=:designer_id  WHERE id=:id";
+            if(name.equals("")||phone_number.equals("")){
+                throw new IllegalArgumentException("fill all the fields");
+            }
+            con.createQuery(sql)
+                    .addParameter("id",this.id)
+                    .addParameter("name",this.name)
+                    .addParameter("email",this.phone_number)
+                    .addParameter("phone_number",this.phone_number)
+                    .addParameter("project_name",this.project_name)
+                    .addParameter("description_project",this.description_project)
+                    .addParameter("timeline_project",this.timeline_project)
+                    .addParameter("price",this.price)
+                    .addParameter("designer_id",this.designer_id)
+                    .executeUpdate();
+        }
+    }
+    public List<Client> getAllEmployeeByDepartment(int designer_id) {
+        List<Client> departments=new ArrayList<>();
+        try (Connection con=sql2o.open()) {
+            String sql = "SELECT client_id FROM designers_clients WHERE designer_id=:designer_id";
+            List<Integer> client_ids = con.createQuery(sql)
+                    .addParameter("designer_id", designer_id)
+                    .executeAndFetch(Integer.class);
+            for (Integer id : client_ids) {
+                String clientResults = "SELECT * FROM clients WHERE id=:id";
+                departments.add(con.createQuery(clientResults)
+                        .addParameter("id", id)
+                        .executeAndFetchFirst(Client.class));
+            }
+            return departments;
+        }
+    }
     @Override
     public void delete() {
-
+        try (Connection con= sql2o.open()){
+            String sql="DELETE FROM clients WHERE id=:id";
+            con.createQuery(sql)
+                    .addParameter("id",this.id)
+                    .executeUpdate();
+        }
+    }
+    public static void deleteAll(){
+        try (Connection con= sql2o.open()){
+            String sql="DELETE FROM clients";
+            con.createQuery(sql)
+                    .executeUpdate();
+        }
     }
 }
