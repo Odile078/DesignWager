@@ -1,13 +1,10 @@
 package models;
 
-import org.sql2o.Connection;
-
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
-public class Designer implements Data {
+public class Designer {
     private int id;
     private String name;
     private String email;
@@ -25,7 +22,6 @@ public class Designer implements Data {
         this.designing_fields =designing_fields;
         this.experience = experience;
         this.website = website;
-        this.id =id;
         this.createdat = new Timestamp(date.getTime());
     }
 
@@ -70,82 +66,5 @@ public class Designer implements Data {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, email, phone_number, designing_fields, experience, website, date, createdat);
-    }
-
-    @Override
-    public void save() {
-        if(this.name.equals("")||this.email.equals("")||this.phone_number.equals("")||this.designing_fields.equals("")||this.experience.equals("")||this.name.equals(null)||this.email.equals(null)||this.phone_number.equals(null)||this.designing_fields.equals(null)||this.experience.equals(null)){
-            throw new IllegalArgumentException("Fill all the fields");
-        }
-        try (Connection con=DB.sql2o.open()){
-
-
-            String sql ="INSERT INTO designers (name,email,phone_number,designing_fields,experience,website,createdat) VALUES (:name,:email,:phone_number,:designing_fields,:experience,:website,:createdat)";
-
-            this.id=(int) con.createQuery(sql,true)
-                    .addParameter("name",this.name)
-                    .addParameter("email",this.email)
-                    .addParameter("phone_number",this.phone_number)
-                    .addParameter("designing_fields",this.designing_fields)
-                    .addParameter("experience",this.experience)
-                    .addParameter("website",this.website)
-                    .addParameter("createdat",this.createdat)
-                    .executeUpdate()
-                    .getKey();
-        }
-
-    }
-    public static List<Designer> all(){
-        try (Connection con=DB.sql2o.open()){
-            String sql="SELECT * FROM designers";
-            return con.createQuery(sql)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetch(Designer.class);
-
-        }
-
-    }
-
-    public static Designer findById(int id){
-        try (Connection con=DB.sql2o.open()){
-            String sql="SELECT * FROM designers WHERE id=:id";
-            return con.createQuery(sql)
-                    .addParameter("id",id)
-                    .executeAndFetchFirst(Designer.class);
-        }
-
-    }
-    public void update(int id,String name, String email, String phone_number, String designing_fields,String experience ,String website){
-        try (Connection con=DB.sql2o.open()){
-            String sql="UPDATE designers SET name=:name,email=:email,phone_number=:phone_number,designing_fields=:designing_fields,experience=:experience,website=:website  WHERE id=:id";
-            if(name.equals("")||phone_number.equals("")){
-                throw new IllegalArgumentException("fill all the fields");
-            }
-            con.createQuery(sql)
-                    .addParameter("id",this.id)
-                    .addParameter("name",this.name)
-                    .addParameter("email",this.phone_number)
-                    .addParameter("phone_number",this.phone_number)
-                    .addParameter("designing_fields",this.designing_fields)
-                    .addParameter("experience",this.experience)
-                    .addParameter("website",this.website)
-                    .addParameter("createdat",this.createdat)
-                    .executeUpdate();
-
-        }
-
-    }
-
-
-    @Override
-    public void delete() {
-        try (Connection con=DB.sql2o.open()){
-            String sql="DELETE FROM designers WHERE id=:id";
-
-            con.createQuery(sql)
-                    .addParameter("id",this.id)
-                    .executeUpdate();
-        }
-
     }
 }

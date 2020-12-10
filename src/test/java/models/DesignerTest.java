@@ -1,22 +1,19 @@
 package models;
 
-import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class DesignerTest {
-    @Rule
-    public DatabaseRule databaseRule=new DatabaseRule();
     @Test
     public void Designer_instantiatesCorrectly_true() {
         Designer testDesigner = new Designer ("Benitha","b@gmail.com","438695879657","interior house design","2 years","htpp:bjk");
         assertEquals(true, testDesigner instanceof Designer);
     }
 
-  @Test
+    @Test
     public void getName() {
-      Designer testDesigner = setupDesigner();
+        Designer testDesigner = setupDesigner();
         assertEquals("Benitha", testDesigner.getName());
     }
 
@@ -103,49 +100,10 @@ public class DesignerTest {
     @Test
     public void setCreatedat() {
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void Designer_throwsExceptionIfFieldsEmpty(){
-        Designer testDesigner = new Designer("","b@gmail.com","438695879657","interior house design","2 years","htpp:bjk");
-
-        if(testDesigner.getName().equals("")||testDesigner.getEmail().equals("")||testDesigner.getPhone_number().equals("")||testDesigner.getDesigning_fields().equals("")||testDesigner.getExperience().equals("")){
-            testDesigner.save();
-        }
-    }
-    /*
-    @Test
-    public void save_insertsObjectIntoDatabase_designersAndNamecanNotBeEmpty() {
-        Designer testDesigner = setupDesigner();
-        testDesigner.save();
-        assertTrue(Designer.all().get(0).equals(testDesigner));
-    }*/
-    @Test
-    public void addedDesignersAreReturnedFromAll() throws Exception {
-        Designer testDesigner = setupDesigner();
-        testDesigner.save();
-        assertEquals(1, Designer.all().size());
-    }
-
-    @Test
-    public void addingFoodSetsId() throws Exception {
-        Designer testDesigner = setupDesigner();
-        int originalDesignerId = testDesigner.getId();
-        testDesigner.save();
-        assertNotEquals(originalDesignerId, testDesigner.getId());
-    }
-
-
-
-
-
-
-
-
-
-
     //HELPER
 
     public Designer setupDesigner(){
         return new Designer("Benitha","b@gmail.com","438695879657","interior house design","2 years","htpp:bjk");
     }
+
 }
