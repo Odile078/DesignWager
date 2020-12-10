@@ -1,0 +1,174 @@
+#myNavbar {
+    background-color: white;
+    font-weight: bolder;
+}
+
+#container1 {
+    margin-top: 50px;
+}
+
+#container2{
+margin-top:50px;
+}
+
+#dw {
+    font-size: 60px;
+    font-weight: bolder;
+    color: rgb(70, 60, 60);
+}
+
+#intro{
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+.intro {
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+#hr{
+margin-left: 50px;
+    width: 100px;
+    height: 4px;
+    border-width: 0;
+    color: gray;
+    background-color: gray
+    }
+
+.hr {
+    margin-left: 50px;
+    width: 100px;
+    height: 4px;
+    border-width: 0;
+    color: gray;
+    background-color: gray
+}
+
+#hr2 {
+    margin-left: 550px;
+    width: 50px;
+    height: 4px;
+    border-width: 0;
+    color: gray;
+    background-color: gray
+}
+
+#intro2 {
+    margin-left: 50px;
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+#start {
+    margin-top: 30px;
+    margin-left: 150px;
+    background-color: grey;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    width: 170px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.start a{
+ color: white;
+}
+
+.start{
+    margin-top: 30px;
+    margin-left: 50px;
+    background-color: grey;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    width: 170px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+#start2{
+    background-color: grey;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    width: 250px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+h3 {
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.iconz {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.iconz a {
+    margin: 20px 10px;
+}
+
+.iconz i {
+    color: black;
+    align-items: center;
+}
+
+.iconz a:hover {
+    box-shadow: 2px 2px 12px rgba(255, 254, 254, 0.856);
+    transition: all ease 0.5s;
+}
+
+footer {
+    background-color: #f2f2f2;
+    height: 50px;
+    padding-bottom: 10px;
+}
+
+.carousel-inner img {
+    width: 100%;
+    min-height: 200px;
+}
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none;
+    }
+}
+
+
+.pic{
+border-radius:50%;
+}
+
+.pic p{
+color: rgb(138, 94, 119);
+}
+.theForm1{
+background-color:#635450;
+color: white;
+
+
+}
+.theForm{
+  padding: 2%;
+  width: 50%;
+  margin-left:200px;
+
+}
+
+#inName input,
+#inEmail input,
+#inMessage input{
+  border: gray groove;
+  color: black;
+}
+.form-group textarea{
+  border:gray groove;
+  color: black;
+  width: 90%;
+
+}
