@@ -17,7 +17,7 @@ public class Sql2oClientDaoTest {
     @BeforeClass
     public static void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/wagerdesign_test";
-        Sql2o sql2o = new Sql2o(connectionString, "odile", "123");
+        Sql2o sql2o = new Sql2o(connectionString, "benitha", "123");
         designerDao = new Sql2oDesignerDao(sql2o);
         clientDao = new Sql2oClientDao(sql2o);
         reviewDao = new Sql2oReviewDao(sql2o);

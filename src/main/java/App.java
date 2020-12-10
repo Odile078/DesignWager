@@ -31,7 +31,7 @@ public class App {
 
 
         String connectionString = "jdbc:postgresql://localhost:5432/wagerdesign";
-        Sql2o sql2o = new Sql2o(connectionString, "odile", "123");
+        Sql2o sql2o = new Sql2o(connectionString, "benitha", "123");
 
         sql2oDesignerDao = new Sql2oDesignerDao(sql2o);
         sql2oClientDao = new Sql2oClientDao(sql2o);
@@ -45,8 +45,28 @@ public class App {
             Map<String,Object> model=new HashMap<String, Object>();
             return new ModelAndView(model,"index.hbs");
         },new HandlebarsTemplateEngine());
-        //ranger
-//department
+
+        get("/about",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"about.hbs");
+        },new HandlebarsTemplateEngine());
+
+        get("/contact",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"contact.hbs");
+        },new HandlebarsTemplateEngine());
+
+/*        get("/designers",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"designers.hbs");
+        },new HandlebarsTemplateEngine());*/
+
+        get("/gallery",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"gallery.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //department
         //interface
         get("/create/designer",(request, response) -> {
             Map<String,Object> model=new HashMap<String, Object>();
@@ -59,18 +79,17 @@ public class App {
             String email=request.queryParams("email");
             String phone_number=request.queryParams("phone_number");
             String designing_fields=request.queryParams("designing_fields");
-            String experience =request.queryParams("experience ");
+            String experience =request.queryParams("experience");
             String website=request.queryParams("website");
             Designer designer=new Designer(name,email,phone_number,designing_fields,experience,website);
             sql2oDesignerDao.add( designer);
             request.session().attribute("item", name);
             model.put("item", request.session().attribute("item"));
             return new ModelAndView(model,"designerForm.hbs");
-            //return new ModelAndView(model,"departmentsuccess.hbs");
         },new HandlebarsTemplateEngine());
 
         //retrieving the department
-        get("/view/designers",(request, response) -> {
+        get("/designers",(request, response) -> {
             Map<String,Object> model=new HashMap<String, Object>();
             model.put("designers",sql2oDesignerDao.getAll());
             return new ModelAndView(model,"designers.hbs");

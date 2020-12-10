@@ -1,0 +1,37 @@
+{{#partial "content"}}
+
+    <div class="container text-center" id="container2">
+        <h3>Our Designers</h3>
+        <hr id="hr2">
+        <br>
+        {{#if designers}}
+            <p> Our designers are the best !!!</p>
+        <br>
+                {{#each designers as |d| }}
+                <div class="row list">
+                    <div class="col-md-4" style="color:black">
+                        <div>
+                            <p>{{d.name}}</p><br>
+                            <p>{{d.email}}</p><br>
+                            <p>{{d.phone_number}}</p><br>
+                            <p>{{d.designing_fields}}</p><br>
+                            <p>{{d.experience}}</p><br>
+                            <p>{{d.website}}</p><br>
+                            <p>{{d.createdat}}</p><br>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                {{/each}}
+
+        {{else}}
+            <p class="text">There are no designers, register here <a href="/create/designer">here</a></p>
+        {{/if}}
+
+        <button><p class="text">Register here as a designer<a href="/create/designer"> here</a></p></button>
+    </div><br>
+
+
+{{/partial}}
+
+{{> layout.hbs}}
