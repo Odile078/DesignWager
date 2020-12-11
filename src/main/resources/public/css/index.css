@@ -1,3 +1,6 @@
+body{
+background-image:  linear-gradient( white,grey);
+}
 #myNavbar {
     background-color: white;
     font-weight: bolder;
@@ -150,8 +153,6 @@ color: rgb(138, 94, 119);
 .theForm1{
 background-color:#635450;
 color: white;
-
-
 }
 .theForm{
   padding: 2%;
@@ -163,12 +164,55 @@ color: white;
 #inName input,
 #inEmail input,
 #inMessage input{
-  border: gray groove;
+  border: gray;
   color: black;
 }
 .form-group textarea{
-  border:gray groove;
+  border:gray;
   color: black;
-  width: 90%;
+  width: 96%;
+  height:100px;
+  border-radius: 5px;
 
+}
+
+#give{
+background-color: grey;
+    color: white;
+    font-weight: bolder;
+}
+
+.userimg{
+border-radius:50%;height:100px;
+}
+.jumbotron1{
+margin-top:50px;
+padding:40px;
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+.card-title {
+  margin-bottom: 0.75rem;
+}
+.card-text:last-child {
+  margin-bottom: 0;
 }

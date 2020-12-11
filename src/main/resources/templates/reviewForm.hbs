@@ -1,0 +1,36 @@
+{{#partial "content"}}
+
+    <div class="container text-center" style="margin-top:50px;">
+        <div class="row">
+            <div class="col-md-4 jumbotron" style="margin-left:400px;">
+                <form action="/review/new" method="post">
+                    <h3 class="text">Drop a review on designer</h3>
+                    <div class="form-group">
+                        <label for="user_name">Name</label>
+                        <input type="text" class="form-control form-control-lg" id="user_name" name="user_name" placeholder="Enter Name..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">content</label>
+                        <input type="text" class="form-control form-control-lg" id="content" name="content" placeholder="Enter email..." required>
+                    </div>
+                    <div class="form-group">
+                        <select class="selector" id="designer" name="designer" required>
+                            <option selected>Choose the Designer</option>
+                            {{#if designers}}
+                                {{#each designers }}
+                                    <option name="designer" value={{id}}>{{name}}</option>
+                                {{/each}}
+                            {{/if}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default" style="background-color:gray;"> Review </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><br>
+
+{{/partial}}
+
+{{> layout.hbs}}

@@ -1,0 +1,41 @@
+{{#partial "content"}}
+    <div class="container">
+        <div class="jumbotron jumbotron1">
+            <div class="row">
+                {{#if clients}}
+                    {{#each clients as |a|}}
+                        <div class="col-md-4">
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img class="userimg" src="/images/user.png" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{a.name}}</h5>
+                                            <p class="card-text">{{a.project_name}}</p>
+                                            <p class="card-text"><small class="text-muted">Registered: <br> {{a.price}}</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card text-white bg-dark mb-3" >
+                                <div class="card-body">
+                                    <p class="card-text">Email:{{a.email}}</p>
+                                    <p class="card-text">Phone number: {{a.phone_number}}</p>
+                                    <p class="card-text">Designing fields: {{a.description_project}}</p>
+                                    <p class="card-text">Experience: <br>{{a.timeline_project}}</p>
+                                    <p class="card-text">{{a.price}}</p>
+                                    <a href="/create/designer/clients/{{a.id}}"><button class="btn btn-info btn-md">Hire the designer</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{> layout.hbs}}
