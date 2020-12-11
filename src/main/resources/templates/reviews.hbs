@@ -1,0 +1,30 @@
+{{#partial "content"}}
+
+    <div class="container" id="container2">
+        <div class="text-center">
+            <h3>Reviews</h3>
+            <hr id="hr2">
+            <br>
+        </div>
+        <div class="jumbotron jumbotron1">
+        {{#if reviews}}
+            {{#each reviews as |a|}}
+                <div class="col-md-8">
+                    <div class="card text-white bg-dark mb-3" >
+                        <div class="card-body">
+                            <p class="card-text">Name:{{a.user_name}}</p>
+                            <p class="card-text"> {{a.content}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            {{else}}
+                <h2>No Reviews! Create some a review <a href="/create/designer/:id/review">here</a></h2>
+            </div>
+            {{/if}}
+
+        </div>
+    </div>
+
+{{/partial}}
+{{> layout.hbs}}

@@ -1,0 +1,43 @@
+{{#partial "content"}}
+    <div class="container text-center" style="margin-top:50px;">
+        <h3 style="font-size: 30px; font-weight: bolder;">Hire a designer:</h3>
+        <hr style=" margin-left: 550px; width: 50px; height: 4px; border-width: 0; color: gray; background-color: gray;">
+            <div class="row">
+                <div class="col-md-4 jumbotron" style="margin-left:400px;">
+                    <form action="/create/designer/client/new" method="post">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control form-control-lg" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number">Phone number</label>
+                            <input type="text" class="form-control form-control-lg" id="phone_number" name="phone_number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="project_name">Project name</label>
+                            <input type="text" class="form-control form-control-lg" id="project_name" name="project_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description_project">Description of the project</label>
+                            <input type="text" class="form-control form-control-lg" id="description_project" name="description_project" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="timeline_project">Deadline of the project</label>
+                            <input type="text" class="form-control form-control-lg" id="timeline_project" name="timeline_project" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number">Price you are ready to pay for the project (any currency)</label>
+                            <input type="text" class="form-control form-control-lg" id="price" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default" style="background-color:gray;"> Done </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+{{/partial}}
+{{> layout.hbs}}

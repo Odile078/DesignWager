@@ -56,18 +56,12 @@ public class App {
             return new ModelAndView(model,"contact.hbs");
         },new HandlebarsTemplateEngine());
 
-/*        get("/designers",(request, response) -> {
-            Map<String,Object> model=new HashMap<String, Object>();
-            return new ModelAndView(model,"designers.hbs");
-        },new HandlebarsTemplateEngine());*/
-
         get("/gallery",(request, response) -> {
             Map<String,Object> model=new HashMap<String, Object>();
             return new ModelAndView(model,"gallery.hbs");
         },new HandlebarsTemplateEngine());
 
         //department
-        //interface
         get("/create/designer",(request, response) -> {
             Map<String,Object> model=new HashMap<String, Object>();
             return new ModelAndView(model,"designerForm.hbs");
@@ -88,11 +82,68 @@ public class App {
             return new ModelAndView(model,"designerForm.hbs");
         },new HandlebarsTemplateEngine());
 
-        //retrieving the department
         get("/designers",(request, response) -> {
             Map<String,Object> model=new HashMap<String, Object>();
             model.put("designers",sql2oDesignerDao.getAll());
             return new ModelAndView(model,"designers.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //Client
+
+        get("/create/designer/clients/:id",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            return new ModelAndView(model,"clientForm.hbs");
+        },new HandlebarsTemplateEngine());
+        post("/create/designer/client/new",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            String name=request.queryParams("name");
+            String email=request.queryParams("email");
+            String phone_number=request.queryParams("phone_number");
+            String project_name=request.queryParams("project_name");
+            String description_project =request.queryParams("description_project");
+            String timeline_project=request.queryParams("timeline_project");
+            String price=request.queryParams("price");
+            //int designer_id = Integer.parseInt(request.params("designer"));
+            // model.put("designers",sql2oDesignerDao.getAll());
+            // String designer_id=request.queryParams("designer_id");
+            // Client client=new Client(name,email,phone_number,project_name,description_project,timeline_project,price,designer_id);
+            Client client=new Client(name,email,phone_number,project_name,description_project,timeline_project,price);
+            sql2oClientDao.add(client);
+            request.session().attribute("item", name);
+            model.put("item", request.session().attribute("item"));
+            return new ModelAndView(model,"clientsuccess.hbs");
+            //return new ModelAndView(model,"departmentsuccess.hbs");
+        },new HandlebarsTemplateEngine());
+        //retrieving the department
+        get("/view/clients",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            model.put("clients",sql2oClientDao.getAll());
+            return new ModelAndView(model,"clients.hbs");
+        },new HandlebarsTemplateEngine());
+
+        //Review
+        get("/create/designer/:id/review", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Designer> designers = sql2oDesignerDao.getAll(); //refresh list of links for navbar
+            model.put("designers", designers);
+            return new ModelAndView(model, "reviewForm.hbs"); //new layout
+        }, new HandlebarsTemplateEngine());
+        post("/review/new",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            String user_name=request.queryParams("user_name");
+            String content=request.queryParams("content");
+            int designer_id= Integer.parseInt(request.queryParams("designer"));
+            Review review=new Review(user_name,content,designer_id);
+            sql2oReviewDao.add(review);
+            request.session().attribute("item", user_name);
+            model.put("item", request.session().attribute("item"));
+            return new ModelAndView(model,"reviewsuccess.hbs");
+            //return new ModelAndView(model,"departmentsuccess.hbs");
+        },new HandlebarsTemplateEngine());
+        get("/view/reviews/:id",(request, response) -> {
+            Map<String,Object> model=new HashMap<String, Object>();
+            model.put("reviews",sql2oReviewDao.getAll());
+            return new ModelAndView(model,"reviews.hbs");
         },new HandlebarsTemplateEngine());
 
     }

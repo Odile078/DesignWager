@@ -1,37 +1,55 @@
 {{#partial "content"}}
 
-    <div class="container text-center" id="container2">
+    <div class="container" id="container2">
+        <div class="text-center">
         <h3>Our Designers</h3>
         <hr id="hr2">
         <br>
-        {{#if designers}}
-            <p> Our designers are the best !!!</p>
-        <br>
-                {{#each designers as |d| }}
-                <div class="row list">
-                    <div class="col-md-4" style="color:black">
-                        <div>
-                            <p>{{d.name}}</p><br>
-                            <p>{{d.email}}</p><br>
-                            <p>{{d.phone_number}}</p><br>
-                            <p>{{d.designing_fields}}</p><br>
-                            <p>{{d.experience}}</p><br>
-                            <p>{{d.website}}</p><br>
-                            <p>{{d.createdat}}</p><br>
-                        </div>
-                        <br>
+            <a href="/create/designer"><button class="btn btn-info btn-md">Register yourself as a designer</button></a>
+        </div>
+            <div class="jumbotron jumbotron1">
+                    {{#if designers}}
+                    <div class="row list">
+                        {{#each designers as |a|}}
+                            <div class="col-md-4" style="margin-top: 30px">
+                                <div class="card mb-3" style="max-width: 540px;">
+                                    <div class="row g-0" style="background-color:white;">
+                                        <div class="col-md-4" style="margin-top: 20px">
+                                            <img class="userimg" src="/images/icon1.png" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title" style="font-size:30px;color:rgb(53, 169, 236)">{{a.name}}</h5>
+                                                <p class="card-text">{{a.designing_fields}}</p>
+                                                <p class="card-text"><small class="text-muted">Registered: <br> {{a.createdat}}</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8"  style="margin-top: 30px">
+                                <div class="card text-white bg-dark mb-3" style="; background-color:#343A40!important; color:white;">
+                                    <div class="card-body">
+                                        <p class="card-text">Email: {{a.email}}</p>
+                                        <p class="card-text">Phone number: {{a.phone_number}}</p>
+                                        <p class="card-text">Designing fields: {{a.designing_fields}}</p>
+                                        <p class="card-text">Experience: <br>{{a.experience}}</p>
+                                        <p class="card-text">Website: {{a.website}}</p>
+                                        <a href="/create/designer/clients/{{a.id}}"><button class="btn btn-info btn-md">Hire {{a.name}}</button></a>
+                                        <a href="/create/designer/{{a.id}}/review"><button class="btn btn-info btn-md">Review the designer</button></a>
+                                        <a href="/view/reviews/{{a.id}}"><button class="btn btn-info btn-md">Reviews</button></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <h2>No Designers! Create some designers <a href="/create/designer">here</a></h2>
                     </div>
-                </div>
-                {{/each}}
+                    {{/if}}
 
-        {{else}}
-            <p class="text">There are no designers, register here <a href="/create/designer">here</a></p>
-        {{/if}}
-
-        <button><p class="text">Register here as a designer<a href="/create/designer"> here</a></p></button>
-    </div><br>
-
+            </div>
+    </div>
 
 {{/partial}}
-
 {{> layout.hbs}}
